@@ -1,6 +1,5 @@
 #Código para resolver caso técnico para análisis - Data engineer 
 #Derco, Carlos Peñaloza Casanova
-from turtle import color
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -232,7 +231,6 @@ df['EDAD'] = df['EDAD'].fillna(0).astype(int)
 df['VIGENCIA'].unique()
 
 
-
 '''SE PIDE APLICAR TÉCNICAS DE ETL, EXPLORACIÓN, DESCUBRIMIENTO 
 Y ANALÍTICA PARA EXPLICAR Y CARACTERIZAR LOS FENÓMENOS QUE EN LOS DATOS SE PUEDEN OBSERVAR'''
 
@@ -260,7 +258,7 @@ colors_sns = sns.color_palette("Paired",10)
 #_______SEXO DE LOS CLIENTES DERCO_________
 fig = plt.figure(figsize=(9,6))
 ax = plt.bar(df_derco['SEXO'].value_counts().index, df_derco['SEXO'].value_counts(), color=colors_plt)
-plt.title('Sexo de los clientes Derco', color="white")
+plt.title('Sexo de los clientes Derco')
 
 for rect in ax.patches:
     height = rect.get_height()
@@ -272,7 +270,7 @@ plt.yticks([])
 #_______SEXO DE LOS CLIENTES DE OTRAS MARCAS_________
 fig = plt.figure(figsize=(9,6))
 ax = plt.bar(df_otros['SEXO'].value_counts().index, df_otros['SEXO'].value_counts(), color=colors_plt)
-plt.title('\n Sexo de los clientes de otras marcas', color="white")
+plt.title('\n Sexo de los clientes de otras marcas')
 
 for rect in ax.patches:
     height = rect.get_height()
@@ -290,13 +288,13 @@ fig = plt.figure(figsize=(10,5))
 plt.pie(df_derco['SEXO'].value_counts(), labels=df_derco['SEXO'].value_counts().index, colors=colors_plt,
         autopct='%.0f%%', shadow=True, rotatelabels=False)
 
-plt.title('Porcentaje de clientes Derco según sexo', color="white")
+plt.title('Porcentaje de clientes Derco según sexo')
 fig = plt.figure(figsize=(10,5))
 
 plt.pie(df_otros['SEXO'].value_counts(), labels=df_otros['SEXO'].value_counts().index, colors=colors_plt,
         autopct='%.0f%%', shadow=True, rotatelabels=False)
 
-plt.title('\n\nPorcentaje de clientes de otras marcas según sexo', color="white")
+plt.title('\n\nPorcentaje de clientes de otras marcas según sexo')
 plt.show()
 
 
@@ -310,7 +308,7 @@ group1 = df_derco.groupby(df_derco.EDAD_cuts)
 #edad clientes DERCO
 fig = plt.figure(figsize=(9,6))
 ax = sns.barplot(x=list(group1.groups), y= group1.EDAD.count())
-plt.title('Edad de los clientes Derco\n', color="white")
+plt.title('Edad de los clientes Derco\n')
 plt.xticks(rotation=90)
 
 for rect in ax.patches:
@@ -329,7 +327,7 @@ group1 = df_otros.groupby(df_otros.EDAD_cuts)
 #edad clientes OTRAS MARCAS
 fig = plt.figure(figsize=(9,6))
 ax = sns.barplot(x=list(group1.groups), y= group1.EDAD.count())
-plt.title('\n\nEdad de los clientes de otras marcas\n', color="white")
+plt.title('\n\nEdad de los clientes de otras marcas\n')
 plt.xticks(rotation=90)
 
 for rect in ax.patches:
@@ -344,7 +342,7 @@ plt.show()
 #distribución de la edad de los clientes DERCO
 fig = plt.figure(figsize=(9,6))
 ax = sns.distplot(df_derco[df_derco['EDAD']>0]['EDAD'], kde=False)
-plt.title('Distribución de la edad de los clientes de Derco', color="white")
+plt.title('Distribución de la edad de los clientes de Derco')
 plt.box(False)
 plt.yticks([])
 plt.ylabel('Densidad')
@@ -353,7 +351,7 @@ plt.ylabel('Densidad')
 #distribución de la edad de los clientes OTRAS MARCAS
 fig = plt.figure(figsize=(9,6))
 ax = sns.distplot(df_otros[df_otros['EDAD']>0]['EDAD'], kde=False)
-plt.title('\n\nDistribución de la edad de los clientes de otras marcas', color="white")
+plt.title('\n\nDistribución de la edad de los clientes de otras marcas')
 plt.box(False)
 plt.yticks([])
 plt.ylabel('Densidad')
@@ -367,7 +365,7 @@ plt.show()
 #cantidad de vehiculos derco vs otras 
 fig = plt.figure(figsize=(9,6))
 ax = plt.bar(df.groupby(df['MARCA'].isin(derco))['PLACA'].count().index, df.groupby(df['MARCA'].isin(derco))['PLACA'].count(), color=colors_plt)
-plt.title('Cantidad de vehiculos', color="white")
+plt.title('Cantidad de vehiculos')
 
 for rect in ax.patches:
     height = rect.get_height()
@@ -382,7 +380,7 @@ fig = plt.figure(figsize=(10,5))
 plt.pie(df.groupby(df['MARCA'].isin(derco))['PLACA'].count(), labels=['OTRAS', 'DERCO'], colors=colors_plt,
         autopct='%.0f%%', shadow=True, rotatelabels=False)
 
-plt.title('\n\nPorcentaje de vehiculos', color="white")
+plt.title('\n\nPorcentaje de vehiculos')
 plt.show()
 
 
@@ -392,13 +390,13 @@ fig = plt.figure(figsize=(15,10))
 plt.pie(df[df['MARCA'].isin(derco)]['MARCA'].value_counts(), labels=df[df['MARCA'].isin(derco)]['MARCA'].value_counts().index, colors=colors_plt,
         autopct='%.0f%%', shadow=True, rotatelabels=False)
 
-plt.title('Porcentaje de vehiculos Derco según su marca', color="white")
+plt.title('Porcentaje de vehiculos Derco según su marca')
 plt.show()
 
 
 df['DERCO'] = df['MARCA'].isin(derco)
 id = df.groupby(['MARCA', 'DERCO'])['PLACA'].count().sort_values().index.get_level_values(0)
-ax = df.groupby(['MARCA', 'DERCO'])['PLACA'].count().unstack(1).reindex(id).plot.barh(figsize=(20,10), color=colors_plt)
+ax = df.groupby(['MARCA', 'DERCO'])['PLACA'].count().unstack(1).reindex(id).plot.barh(figsize=(30,20), color=colors_plt)
 
 plt.title('Cantidad de vehiculos por marca y si pertenecen o no a Derco')
 
